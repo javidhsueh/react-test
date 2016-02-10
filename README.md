@@ -9,6 +9,7 @@ Please check src/index.js, componentDidMount().
 That's the place where I should require the shaders. 
 But I always got error messages like:
 
+``` 
 ./~/glslify-loader!./~/raw-loader!./src/main.vertex.glsl
 Module parse failed: /Users/javid/react-test/node_modules/glslify-loader/index.js!/Users/javid/react-test/node_modules/raw-loader/index.js!/Users/javid/react-test/node_modules/raw-loader/index.js!/Users/javid/react-test/node_modules/glslify-loader/index.js!/Users/javid/react-test/node_modules/raw-loader/index.js!/Users/javid/react-test/node_modules/glslify-loader/index.js!/Users/javid/react-test/src/main.vertex.glsl Line 1: Unexpected token ILLEGAL
 You may need an appropriate loader to handle this file type.
@@ -22,7 +23,7 @@ You may need an appropriate loader to handle this file type.
 | #define GLSLIFY 1
 | module.exports = "module.exports = \"#define GLSLIFY 1\\nmodule.exports = \\\"#define GLSLIFY 1\\\\nprecision mediump float;\\\\n\\\\nvarying vec4 v_Color; // Receive the data from the vertex shader\\\\n\\\\nvoid main() {\\\\n\\\\tgl_FragColor = v_Color; //vec4(0.3, 0.3, 0.9, 1.0);\\\\n}\\\\n\\\"\""
  @ ./src/index.js 232:17-60
-
+```
 
 ## Development
 
