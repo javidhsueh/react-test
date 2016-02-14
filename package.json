@@ -87,11 +87,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@sphere.cs.ucdavis.edu:graph-visualization/react-graph-gl.git"
+    "url": "git@github.com:javidhsueh/react-test.git"
   },
   "homepage": "https://javidhsueh.github.io/",
   "bugs": {
-    "url": "https://sphere.cs.ucdavis.edu/graph-visualization/react-graph-gl/issues"
+    "url": "https://github.com/javidhsueh/react-test/issues"
   },
   "browserify": {
     "transform": [
