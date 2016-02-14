@@ -73,11 +73,12 @@ const demoCommon = {
         test: /\.(glsl|frag|vert)$/,
         loader: 'raw',
         exclude: /node_modules/
-      },
+      }
+    ],
+    postLoaders: [
       {
-        test: /\.(glsl|frag|vert)$/,
-        loader: 'glslify',
-        exclude: /node_modules/ 
+        test: /\.js$/,
+        loader: 'ify'
       }
     ]
   },
@@ -119,11 +120,12 @@ if (TARGET === 'start') {
           test: /\.(glsl|frag|vert)$/,
           loader: 'raw',
           exclude: /node_modules/
-        },
+        }
+      ],
+      postLoaders: [
         {
-          test: /\.(glsl|frag|vert)$/,
-          loader: 'glslify',
-          exclude: /node_modules/ 
+          test: /\.js$/,
+          loader: 'ify'
         }
       ]
     },
@@ -197,11 +199,12 @@ if (TARGET === 'gh-pages' || TARGET === 'deploy-gh-pages') {
           test: /\.(glsl|frag|vert)$/,
           loader: 'raw',
           exclude: /node_modules/
-        },
+        }
+      ],
+      postLoaders: [
         {
-          test: /\.(glsl|frag|vert)$/,
-          loader: 'glslify',
-          exclude: /node_modules/ 
+          test: /\.js$/,
+          loader: 'ify'
         }
       ]
     }
@@ -234,11 +237,12 @@ if (TARGET === 'test' || TARGET === 'tdd' || !TARGET) {
           test: /\.(glsl|frag|vert)$/,
           loader: 'raw',
           exclude: /node_modules/
-        },
+        }
+      ],
+      postLoaders: [
         {
-          test: /\.(glsl|frag|vert)$/,
-          loader: 'glslify',
-          exclude: /node_modules/ 
+          test: /\.js$/,
+          loader: 'ify'
         }
       ]
     }
@@ -272,11 +276,12 @@ const distCommon = {
         test: /\.(glsl|frag|vert)$/,
         loader: 'raw',
         exclude: /node_modules/
-      },
+      }
+    ],
+    postLoaders: [
       {
-        test: /\.(glsl|frag|vert)$/,
-        loader: 'glslify',
-        exclude: /node_modules/ 
+        test: /\.js$/,
+        loader: 'ify'
       }
     ]
   },

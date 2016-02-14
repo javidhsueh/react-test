@@ -1,32 +1,97 @@
+# react-graph-gl
 
-# react-test
+This component is implemented to render large graph with interactive speed. 
+It's a statelful react component, which means it changes the visualization result according to the props you passed into. 
 
-The goal of this component is to use stack.gl to render a network.
-This repo is only for testing how to load shader using glslify-loading in webpack. 
-Please help me to find a way to make it work. 
 
-Please check src/index.js, componentDidMount(). 
-That's the place where I should require the shaders. 
-But I always got error messages like:
+## Usage
 
-``` 
-./~/glslify-loader!./~/raw-loader!./src/main.vertex.glsl
-Module parse failed: /Users/javid/react-test/node_modules/glslify-loader/index.js!/Users/javid/react-test/node_modules/raw-loader/index.js!/Users/javid/react-test/node_modules/raw-loader/index.js!/Users/javid/react-test/node_modules/glslify-loader/index.js!/Users/javid/react-test/node_modules/raw-loader/index.js!/Users/javid/react-test/node_modules/glslify-loader/index.js!/Users/javid/react-test/src/main.vertex.glsl Line 1: Unexpected token ILLEGAL
-You may need an appropriate loader to handle this file type.
-| #define GLSLIFY 1
-| module.exports = "module.exports = \"#define GLSLIFY 1\\nmodule.exports = \\\"#define GLSLIFY 1\\\\nuniform mat4 scaleMat;\\\\nuniform vec4 translateVec;\\\\n\\\\nvarying vec4 v_Color;\\\\n\\\\nattribute vec4 a_Pos;\\\\nattribute vec4 a_Color;\\\\n\\\\nvoid main() {\\\\n\\\\tgl_PointSize = 1.0;\\\\n\\\\tvec4 position = vec4(a_Pos[0], a_Pos[1], a_Pos[2], a_Pos[3]); // original pos\\\\n\\\\tgl_Position = (position + translateVec) * scaleMat ;\\\\n\\\\tv_Color = a_Color;\\\\n}\\\\n\\\"\""
- @ ./src/index.js 231:19-60
+````js
+    return r.div({},[
+      r(GraphGL, {
+        graphData: graphData,
+        setting: renderSetting,
+        width: 1000,
+        height: 1000
+      })
+    ]);
+````
 
-./~/glslify-loader!./~/raw-loader!./src/main.fragment.glsl
-Module parse failed: /Users/javid/react-test/node_modules/glslify-loader/index.js!/Users/javid/react-test/node_modules/raw-loader/index.js!/Users/javid/react-test/node_modules/raw-loader/index.js!/Users/javid/react-test/node_modules/glslify-loader/index.js!/Users/javid/react-test/node_modules/raw-loader/index.js!/Users/javid/react-test/node_modules/glslify-loader/index.js!/Users/javid/react-test/src/main.fragment.glsl Line 1: Unexpected token ILLEGAL
-You may need an appropriate loader to handle this file type.
-| #define GLSLIFY 1
-| module.exports = "module.exports = \"#define GLSLIFY 1\\nmodule.exports = \\\"#define GLSLIFY 1\\\\nprecision mediump float;\\\\n\\\\nvarying vec4 v_Color; // Receive the data from the vertex shader\\\\n\\\\nvoid main() {\\\\n\\\\tgl_FragColor = v_Color; //vec4(0.3, 0.3, 0.9, 1.0);\\\\n}\\\\n\\\"\""
- @ ./src/index.js 232:17-60
-```
+See example/main.js for a full example
 
-## Development
+## API
 
-Please checkout the code at [here](https://github.com/javidhsueh/react-test).
-* Developing - **npm start** - Runs the development server at *localhost:8080* and use Hot Module Replacement. You can override the default host and port through env (`HOST`, `PORT`).
+### graphData: (object)
+The graph data.
 
+### width: (number)
+The width of the container.
+
+### height: (number)
+The height of the container.
+
+### setting: (object)
+The rendering setting of the graph. Including three parts:
+````js
+// example: 
+  setting: {
+    uniformSetting: {
+      nodeSize: 5,
+      nodeColor: [43, 140, 190, 255],
+      nodeShape: 'circle',
+      nodeBorderColor: [143, 140, 190, 255],
+      nodeShowLabel: true,
+      edgeThickness: 2.0,
+      edgeColor: [200, 200, 200, 255],
+      edgePattern: 'solid',
+      edgeRouting: 'line',
+      edgeShowLabel: true
+    },
+    dataMapping: {
+      nodeSizeProperty: 'none',
+      nodeSizeRange: [1, 20],
+      nodeColorProperty: 'none',
+      nodeColorMap: [
+        {offset: 0, color: [0, 0, 255, 255]},
+	    {offset: 0.5, color: [128, 0, 128, 255]},
+	    {offset: 1, color: [255, 0, 0, 255]}
+      ],
+      edgeThicknessProperty: 'none',
+      edgeThicknessRange: [0.1, 5.0],
+      edgeColorProperty: 'none',
+      edgeColorMap: [
+        {offset: 0, color: [0, 0, 255, 255]},
+        {offset: 0.5, color: [128, 0, 128, 255]},
+        {offset: 1, color: [255, 0, 0, 255]}
+      ]
+    },
+    individualMapping: [
+      {id: 0, nodes: [2,5,6], nodeSize: 15, nodeColor: [255, 0, 0, 255]}
+    ]
+  }
+````
+The rednering result will change according to this setting. 
+
+
+## Callback
+
+### function onNodeSelected (selectedNodes)
+
+
+## More related work to read
+
+1. [Andrew Thall](http://andrewthall.org/)'s
+[Extended-Precision Floating-Point Numbers for GPU Computation](http://andrewthall.org/papers/df64_qf128.pdf).
+2. [Improving precision in your vertex transform](http://github.prideout.net/emulating-double-precision/)
+3. [Double Precision in OpenGL and WebGL](http://blog.hvidtfeldts.net/index.php/2012/07/double-precision-in-opengl-and-webgl/)
+4. [Heavy computing with GLSL – Part 2: Emulated double precision](https://www.thasler.com/blog/blog/glsl-part2-emu)
+
+## To install
+
+    npm install
+
+## To run
+
+    npm run start
+
+This will start a budo server running on localhost:9966.

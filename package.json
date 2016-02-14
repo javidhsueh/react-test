@@ -1,6 +1,6 @@
 {
   "name": "react-test",
-  "description": "react graph gl",
+  "description": "Render large graph using WebGL.",
   "author": "Javid Hsueh",
   "user": "javidhsueh",
   "version": "0.0.1",
@@ -13,7 +13,7 @@
     "dist": "webpack",
     "dist-min": "webpack",
     "dist-modules": "babel ./src --out-dir ./dist-modules",
-    "lint": "eslint . --ext .js --ext .jsx",
+    "lint": "eslint ./src --ext .js --ext .jsx",
     "preversion": "npm run test && npm run lint && npm run dist && npm run dist-min && git commit --allow-empty -am \"Update dist\"",
     "prepublish": "npm run dist-modules",
     "postpublish": "npm run gh-pages && npm run deploy-gh-pages",
@@ -21,12 +21,19 @@
   },
   "main": "dist-modules",
   "dependencies": {
+    "brfs": "^1.4.3",
     "get-canvas-context": "^1.0.1",
     "gl-buffer": "^2.1.2",
     "gl-shader": "^4.2.0",
     "glslify": "^5.0.2",
     "glslify-loader": "^1.0.2",
+    "ify-loader": "^1.0.3",
+    "key-mirror": "^1.0.1",
+    "keycode": "^2.1.0",
     "lodash": "^3.10.1",
+    "mouse-position": "^2.0.1",
+    "mouse-pressed": "^1.0.0",
+    "mouse-wheel": "^1.0.2",
     "raw-loader": "^0.5.1",
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
@@ -80,11 +87,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:javidhsueh/react-test.git"
+    "url": "git@sphere.cs.ucdavis.edu:graph-visualization/react-graph-gl.git"
   },
   "homepage": "https://javidhsueh.github.io/",
   "bugs": {
-    "url": "https://github.com/javidhsueh/react-test/issues"
+    "url": "https://sphere.cs.ucdavis.edu/graph-visualization/react-graph-gl/issues"
+  },
+  "browserify": {
+    "transform": [
+      "glslify",
+      "brfs"
+    ]
   },
   "keywords": [
     "react",

@@ -6,6 +6,8 @@ body {
     font-family: Sans-Serif;
 
     line-height: 1.5;
+
+    overflow-x: hidden;
 }
 
 form label {
